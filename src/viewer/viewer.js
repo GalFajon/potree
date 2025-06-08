@@ -1447,6 +1447,7 @@ export class Viewer extends EventDispatcher {
 		this.renderer = new THREE.WebGLRenderer({
 			alpha: true,
 			premultipliedAlpha: false,
+			logarithmicDepthBuffer: true,
 			canvas: canvas,
 			context: context
 		});
