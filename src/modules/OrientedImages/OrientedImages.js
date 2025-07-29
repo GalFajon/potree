@@ -163,6 +163,8 @@ export class OrientedImageLoader {
 
 		const parser = new DOMParser();
 		const doc = parser.parseFromString(text, "application/xml");
+		
+		console.log(doc);
 
 		const width = parseInt(doc.getElementsByTagName("width")[0].textContent);
 		const height = parseInt(doc.getElementsByTagName("height")[0].textContent);
@@ -337,9 +339,11 @@ export class OrientedImageLoader {
 				//console.log(intersects);
 				const intersection = intersects[0];
 				const orientedImage = intersection.object.orientedImage;
-				orientedImage.line.material.color.setRGB(1, 0, 0);
-				selectionChanged = hoveredElement !== orientedImage;
-				hoveredElement = orientedImage;
+				if (orientedImage.clickable) {
+					orientedImage.line.material.color.setRGB(1, 0, 0);
+					selectionChanged = hoveredElement !== orientedImage;
+					hoveredElement = orientedImage;
+				}
 			} else {
 				hoveredElement = null;
 			}
