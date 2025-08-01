@@ -407,6 +407,11 @@ export class OrientedImageLoader {
 
 			viewer.scene.view.setView(newCamPos, newCamTarget, 500, () => {
 				orientedImageControls.capture(image);
+
+				viewer.dispatchEvent({
+					type:'oriented_image_focused',
+					detail: {image: image}
+				});
 			});
 
 			if (image.texture === null) {
