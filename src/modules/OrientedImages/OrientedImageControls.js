@@ -40,6 +40,11 @@ export class OrientedImageControls extends EventDispatcher {
 		this.elExit = $(`<input type="button" value="Back to 3D view" style="position: absolute; bottom: 10px; right: 10px; z-index: 1000" />`);
 
 		this.elExit.click(() => {
+			viewer.dispatchEvent({
+				type:'oriented_image_unfocused',
+				detail: {image: this.image}
+			});
+
 			this.release();
 		});
 
