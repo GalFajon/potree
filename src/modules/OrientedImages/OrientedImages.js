@@ -306,7 +306,7 @@ export class OrientedImageLoader {
 		}
 
 		let hoveredElement = null;
-		let clipVolume = null;
+		//let clipVolume = null;
 
 		function onMouseMoveToOrientedImage(evt) {
 			const tStart = performance.now();
@@ -344,16 +344,15 @@ export class OrientedImageLoader {
 				hoveredElement = null;
 			}
 
-			let shouldRemoveClipVolume = clipVolume !== null && hoveredElement === null;
-			let shouldAddClipVolume = clipVolume === null && hoveredElement !== null;
+			//let shouldRemoveClipVolume = false;
+			//let shouldAddClipVolume = false;
 
-			if (clipVolume !== null && (hoveredElement === null || selectionChanged)) {
-				// remove existing
+			/*if (clipVolume !== null && (hoveredElement === null || selectionChanged)) {
 				viewer.scene.removePolygonClipVolume(clipVolume);
 				clipVolume = null;
-			}
+			}*/
 
-			if (shouldAddClipVolume || selectionChanged) {
+			if (/*shouldAddClipVolume ||*/ selectionChanged) {
 				const img = hoveredElement;
 				const fov = cameraParams.fov;
 				const aspect = cameraParams.width / cameraParams.height;
@@ -375,6 +374,8 @@ export class OrientedImageLoader {
 						newCamDir.clone().multiplyScalar(viewer.getMoveSpeed()));
 					camera.position.copy(newCamPos);
 				}
+				/*
+				- REMOVED default behavior where mouseover on an image creates a new clipping polygon
 				let volume = new Potree.PolygonClipVolume(camera);
 				let m0 = new THREE.Mesh();
 				let m1 = new THREE.Mesh();
@@ -388,7 +389,7 @@ export class OrientedImageLoader {
 				volume.initialized = true;
 
 				viewer.scene.addPolygonClipVolume(volume);
-				clipVolume = volume;
+				clipVolume = volume;*/
 			}
 			const tEnd = performance.now();
 			//console.log(tEnd - tStart);
