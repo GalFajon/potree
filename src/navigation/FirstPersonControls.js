@@ -278,5 +278,14 @@ export class FirstPersonControls extends EventDispatcher {
 			this.translationDelta.multiplyScalar(attenuation);
 			this.translationWorldDelta.multiplyScalar(attenuation);
 		}
+
+		{ // dispatch update event if camera moved
+			const hasTranslation = this.translationDelta.length() > 0.0001 || this.translationWorldDelta.length() > 0.0001;
+			const hasRotation = Math.abs(this.yawDelta) > 0.0001 || Math.abs(this.pitchDelta) > 0.0001;
+			
+			if (hasTranslation || hasRotation) {
+				this.dispatchEvent({type: 'move'});
+			}
+		}
 	}
 };
